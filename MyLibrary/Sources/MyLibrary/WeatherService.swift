@@ -8,7 +8,7 @@ public protocol WeatherService {
 
 //Add enum 
 enum BaseUrl :String {
-    case mock = "http://localhost:8080/weather"
+    case mock = "http://localhost:8080/data/2.5/weather"
     case prod = "https://api.openweathermap.org/data/2.5/weather"
 }
 class WeatherServiceImpl: WeatherService {
@@ -30,6 +30,7 @@ class WeatherServiceImpl: WeatherService {
                 case let .success(weather):
                     let temperature = weather.main.temp
                     let temperatureAsInteger = Int(temperature)
+                    print("Temperature from api: ", temperatureAsInteger)
                     continuation.resume(with: .success(temperatureAsInteger))
 
                 case let .failure(error):
